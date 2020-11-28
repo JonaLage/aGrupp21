@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <AnchorPane layoutX="-38.0" layoutY="-45.0" prefHeight="609.0" prefWidth="498.0">
+         <children>
+            <Label layoutX="89.0" layoutY="107.0" text="Name:" />
+            <Label layoutX="89.0" layoutY="148.0" text="Customer Number:" />
+            <TextField fx:id="txtCustName" layoutX="236.0" layoutY="102.0" />
+            <TextField fx:id="txtCustNbr" layoutX="236.0" layoutY="143.0" />
+            <RadioButton fx:id="rbtnHasCard" layoutX="126.0" layoutY="209.0" mnemonicParsing="false" text="Had card">
+               <toggleGroup>
+                  <ToggleGroup fx:id="cardGrp" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbtnNoCard" layoutX="126.0" layoutY="239.0" mnemonicParsing="false" text="No  card" toggleGroup="$cardGrp" />
+            <Label fx:id="lblResponse" layoutX="92.0" layoutY="400.0" text="Response:" />
+            <Button layoutX="94.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnAdd_Click" prefHeight="27.0" prefWidth="54.0" text="Add" />
+            <Button layoutX="94.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnFind_Click" prefHeight="27.0" prefWidth="54.0" text="Find" />
+            <Button layoutX="94.0" layoutY="535.0" mnemonicParsing="false" onAction="#btnDelete_Click" text="Delete" />
+            <Button layoutX="222.0" layoutY="437.0" mnemonicParsing="false" onAction="#btnNewName_Click" text="New name" />
+            <Label layoutX="92.0" layoutY="288.0" text="Card Type:" />
+            <Label layoutX="92.0" layoutY="327.0" text="Card Number:" />
+            <TextField fx:id="txtCardType" layoutX="236.0" layoutY="283.0" />
+            <TextField fx:id="txtCardNbr" layoutX="236.0" layoutY="322.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
