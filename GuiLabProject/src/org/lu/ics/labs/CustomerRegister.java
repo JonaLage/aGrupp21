@@ -2,6 +2,7 @@ package org.lu.ics.labs;
 
 import java.util.ArrayList;
 
+
 public class CustomerRegister {
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	
@@ -34,10 +35,26 @@ public class CustomerRegister {
 			c.setCName(newName); 
 		}
 	}
-	public void addCreditcard(String customerNbr, Creditcard creditCard) { 
+	public void addAccount(String customerNbr, Account account) { 
 		Customer c = this.findCustomer(customerNbr);
 		if (c != null) {
-			c.addCreditcard(creditCard); 
+			c.addAccount(account); 
 		}
+	}
+	public Account findAccount(String cNumber, int accountNumber) {
+		Customer c = findCustomer(cNumber);
+		if (c != null) {
+			Account acc = c.findAccount(accountNumber);
+			return acc;
+		}
+		return null;
+	}
+	public double totBalancePerson(String cNumber) {
+		double totb = 0;
+		Customer c = findCustomer(cNumber);
+		if (c != null) {
+			totb = c.totBalance();
+		}
+		return totb;
 	}
 }
