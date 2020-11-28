@@ -2,52 +2,36 @@ package org.lu.ics.labs;
 
 public class Creditcard {
 
-	private String cNumber;
-	private String cName;
+	private int cardNumber;
+	private String type;
 	
-	public Creditcard(String cNumber, String cName) {
-		this.cNumber = cNumber;
-		this.cName = cName;
+	private Customer holder;
+	
+	public int getCardNumber() {
+		return this.cardNumber;
 	}
-
-	private Creditcard creditcard;
-
-	public String getCNumber() {
-		return this.cNumber;
+	
+	public void setCardNumber(int value) {
+		this.cardNumber = value;
 	}
-
-	public void setCNumber(String cNumber) {
-		this.cNumber = cNumber;
+	
+	public String getType() {
+		return  this.type;
 	}
-
-	public String getCName() {
-		return this.cName;
+	
+	public void setType(String type) {
+		this.type  = type;
 	}
-
-	public void setCName(String cName) {
-		this.cName = cName;
+	
+	public Customer getHolder() {
+		return this.holder;
 	}
-
-	public Creditcard getCreditcard() {
-		return this.creditcard;
+	
+	public void setHolder(Customer value) {
+		this.holder = value; 
 	}
-
-	public void setCreditcard(Creditcard value) {
-		this.creditcard = value;
+	public Creditcard(int cNbr, String type) {
+		this.setCardNumber(cNbr);
+		this.setType(type);
 	}
-
-	public void addCreditcard(Creditcard card) {
-		this.setCreditcard(card);
-	}
-
-	public void setHolder(Customer tmpCustomer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Creditcard getHolder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

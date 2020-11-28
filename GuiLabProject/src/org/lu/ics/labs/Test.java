@@ -4,8 +4,8 @@ public class Test {
 
 	public static void main(String[] args) {
 		//Skapar två nya kreditkort
-		Creditcard creditCard1 = new Creditcard("123", "Visa");
-		Creditcard creditCard2 = new Creditcard("234", "Mastercard");
+		Creditcard creditCard1 = new Creditcard(123, "Visa");
+		Creditcard creditCard2 = new Creditcard(234, "Mastercard");
 		
 		//Skapar två nya kunder
 		Customer customer1 = new Customer("1111-1111", "Anna Andersson");
@@ -28,7 +28,7 @@ public class Test {
 		
 		//Testar några av objektens metoder
 		System.out.println(creditCard1.getHolder().getCName());
-		System.out.println(customer2.getCreditcard().getCNumber());
+		System.out.println(customer2.getCreditcard().getCardNumber());
 		Customer tmpC = customers.findCustomer("1111-1111");
 		if(tmpC != null) {
 			System.out.println("Hittade: " + tmpC.getCName());

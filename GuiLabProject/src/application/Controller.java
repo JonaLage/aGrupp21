@@ -50,7 +50,7 @@ public class Controller {
 		}
 		reg.addCustomer(tmpCustomer);
 	}
-
+	@FXML
 	public void btnFind_Click(ActionEvent event) {
 		String cNumber = txtCustNbr.getText();
 		Customer tmpCustomer = reg.findCustomer(cNumber);
