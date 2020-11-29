@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 
 public class Customer {
+	
 	private String cNumber; 
 	private String cName;
-	//private Creditcard creditcard;
 	private ArrayList<Account> accountList = new ArrayList<Account>();
 	
 	public String getCNumber() { 
@@ -21,20 +21,7 @@ public class Customer {
 	public void setCName(String cName) { 
 		this.cName = cName;
 	}
-	/*public Creditcard getCreditcard() { 
-		return this.creditcard;
-	}
-	public void setCreditcard(Creditcard value) { 
-		this.creditcard = value;
-	}
-	public void addCreditcard(Creditcard card) { 
-		this.setCreditcard(card);
-	}
-	public Customer(String cNumber, String cName) { 
-		this.setCNumber(cNumber); 
-		this.setCName(cName);
-	}
-	*/
+	
 	public ArrayList<Account> getAccountList() {
 		return accountList;
 	}

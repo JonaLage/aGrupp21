@@ -1,11 +1,16 @@
 package org.lu.ics.labs;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 
 public class CustomerRegister {
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
+	private ArrayList<Account>accounts = new ArrayList();
 	
+
 	public ArrayList<Customer> getCustomers() { 
 		return this.customers;
 	}
@@ -57,4 +62,51 @@ public class CustomerRegister {
 		}
 		return totb;
 	}
+	/*credit an existing account in the collection of
+	 *account. If nbr isn't found,an error message is returned.
+	 *if it is found then it will be credited and a message
+	 *is returned to indicate a succesfull credit
+	 */
+	public String creditAccount(int nbr, double amountIn){
+		boolean found = false;
+		String results ="";
+		ListIterator iter = accounts.listIterator();
+		while(iter.hasNext()&& !found)
+		        {
+		Account acc = (Account)iter.next();       
+		if(acc.getNbr()==nbr)
+		             {
+		              results = acc.credit(amountIn);
+			  	found = true; // stop the loop
+			     }
+			}
+		if(!found) results = "Customer not found";
+		return results;
+		}
+	/*Debit an existig account in the collection of accounts
+	 *If the account nbr is not found, error message is
+	 *returned. If it is found then if the specified amount
+	 *is <= balance, it will be debited the amount  and a 
+	 *message returned to indicate a successful debit, 
+	 *otherwise and error message indicating insufficient
+	 *funds is returned. 
+	 */
+	public String debitAccount(int nbr, double anAmount) {
+		boolean found = false;
+		String results ="";
+		ListIterator iter = accounts.listIterator();
+		while(iter.hasNext()&& !found)
+		        {
+		Account acc = (Account)iter.next();
+		   if(acc.getNbr()== nbr)
+		             {
+		              results = acc.debit(anAmount);
+			  	found = true;
+			     }
+			}
+
+		if(!found) results = "No such customer";
+		return results;
+		}
+
 }
