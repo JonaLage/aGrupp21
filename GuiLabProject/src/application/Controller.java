@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -10,7 +11,6 @@ import org.lu.ics.labs.Account;
 //import org.lu.ics.labs.Creditcard; 
 import org.lu.ics.labs.Customer;
 import org.lu.ics.labs.CustomerRegister;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label; 
@@ -29,13 +29,15 @@ public class Controller {
 	@FXML
 	private TextField txtAccountNbr;
 	@FXML
+	private TextField txtAmount;
+	@FXML
 	private Label lblResponse;
 	@FXML
 	private TextArea taComment;
-	@FXML
-	private RadioButton rbtnHasCard;
-	@FXML
-	private RadioButton rbtnNoCard;
+	//@FXML
+	//private RadioButton rbtnHasCard;
+	//@FXML
+	//private RadioButton rbtnNoCard;
 	
 	public ArrayList<Customer> customers = new ArrayList<Customer>();
 	public ArrayList<Account> accountList = new ArrayList<Account>();
@@ -46,18 +48,41 @@ public class Controller {
 	
 	@FXML
 	public void btnAdd_Click(ActionEvent event) {
-	String cName = txtCustName.getText();
-	String cNumber = txtCustNbr.getText();
-	Customer tmpCustomer = new Customer(cNumber, cName);
-	lblResponse.setText("Response: New customer created.");
+		// what is the current size of the customer table (array list)
+		// this will be used to determine if the customer was added successfully
+		int element = accountList.size();
+		String cNumber = txtCustNbr.getText();
+		Customer tmpCustomer = cReg.findCustomer(cNumber); 
+
+		// did the user enter any information in the ID box
+		if (txtCustNbr.getText().isEmpty()) {
+			lblResponse.setText("Please Enter Customer ID");
+			// return 0;
+		
+		} else {
+			cReg.addNewAccount(tmpCustomer);
+			// check to see if the customer was added to the table and return true if yes
+			// and false if not
+			if (element < accountList.size()) {
+				lblResponse.setText("Account Created successfully!");
+			} else { // notify the user that the customer was not added
+				if (element == accountList.size()) {
+					lblResponse.setText("Account Creation unsuccessful!");
+				}
+			}
+		}
+	}
+	/*lblResponse.setText("Response: New customer created.");
 	if (rbtnHasCard.isSelected()) {
-		String AccountType = txtAccountType.getText();
-		int nbr;
+		String accountType = txtAccountType.getText();
+		int accountNbr;
+		taComment.setText("a");
 		try {
-			nbr = Integer.parseInt(txtAccountNbr.getText());
-			Account a = new Account(nbr, AccountType);
+			accountNbr = Integer.parseInt(txtAccountNbr.getText());
+			Account a = new Account(accountNbr, accountType);
 			tmpCustomer.setAccountList(accountList);
 			a.setHolder(tmpCustomer);
+			taComment.setText("b");
 		} catch (Exception e1) {
 			lblResponse.setText("Response: Error, Account Number.");
 		}
@@ -65,6 +90,8 @@ public class Controller {
 		lblResponse.setText("Response: blablabla");
 	}
 	cReg.addCustomer(tmpCustomer);
+	taComment.setText("c");
+	//accountList.add(tmpCustomer); //??
 	}
 	
 		/*För att skapa ett konto:
@@ -126,24 +153,7 @@ public class Controller {
 				lblResponse.setText("Account Number accepted!");
 			}
 		}*/
-		/*if (txtAccountNbr.getText().equals("0")) {
-			txtAccountNbr.setText(autoAcctNum + bu.generateUniqueAccountNumber());
-		} else if (txtAccountNbr.getText().isEmpty()) {
-			lblResponse.setText("Account Number cannot be blank!\nPlease enter Account Number or press 0 to automaticlly generate one!");
-		} else {
-			for (Account a: accounts) {
-				if (a.getAccountNumber().equals(txtAccountNbr.getText())) {
-					isAcctFound = true;
-				}
-			}
-			if (isAcctFound) {
-				lblResponse.setText("Account Number already used! Please choose a different Account Number!");
-				
-			} else {
-				lblResponse.setText("Account Number accepted!");
-			}
-		}
-	}*/
+		
 	
 	@FXML
 	public void btnFind_Click(ActionEvent event) {
@@ -156,11 +166,12 @@ public class Controller {
 			for (Customer c : customers) {
 				taComment.setText("Customer name: " +c.getCName()+ "\nAccounts: "+c.getAccountList());
 			}
-		} else if (!cNumber.equals(tmpCustomer.getCNumber())) {
+		} else /*if (!cNumber.equals(tmpCustomer.getCNumber()))*/ {
 				lblResponse.setText("Customer does not exist.");
 		}
 			
 	}
+	
 	
 	
 
@@ -203,26 +214,6 @@ public class Controller {
 		}
 	}
 		
-		/*String description = "";
-		// user is removing a customer
-		if (remNum==0) { // remove customer
-			// validate customer
-			for (Customer c: customers) {
-				if (c.getCustomerID().equals(txtCustomerNum.getText())) {
-					if (!c.getActive()) {
-						// set the description with customer id and name
-						description = c.getCustomerID() + "\t" + c.getCustomerName() + " Removed";
-						// make transaction
-						createCustomerTransaction(c.getCustomerID(), description);
-						// remove customer
-						customers.remove(c);
-						// notify user
-						lblMessage.setText(description);
-						break;
-					}
-				}		
-		
-	}*/
 
 	@FXML
 	public void btnNewName_Click(ActionEvent event) {
@@ -247,6 +238,7 @@ public class Controller {
 			}
 			Customer customer = new Customer(txtCustNbr.getText(), txtCustName.getText());
 			customers.add(customer);
+			//cReg.addCustomer(tmpCustomer);
 			String newName = txtCustName.getText();
 			cReg.setCustomerName(cNumber, newName);
 			// check to see if the customer was added to the table and return true if yes
@@ -270,15 +262,34 @@ public class Controller {
 		} else {
 			lblResponse.setText("Response: New customer could not be created.");
 		}
-		
+		*/
 		
 		@FXML
-		*/public void btnCredit_Click(ActionEvent event) {
+		public void btnCredit_Click(ActionEvent event) {
 			
-	
+		
+			double aIn  = Integer.parseInt(txtAmount.getText());
+			int aNbr = Integer.parseInt(txtAccountNbr.getText());
+			
+			cReg.creditAccount(aNbr, aIn ); 
+			//taComment.setText("Account " +aNbr.getAccountNbr()+ " has been credited: $"+tmpA.credit(aIn));
 
-	
-}
+		}
+		@FXML
+		public void btnWithdraw_Click(ActionEvent event) {
+			 {   /*Get value from field*/
+				double aOut = Double.parseDouble(txtAmount.getText());
+				int aNbr = Integer.parseInt(txtAccountNbr.getText());
+				 
+					
+				 cReg.debitAccount(aNbr, aOut);
+				/*Withdraw passing value needed to withdraw as an argument*/
+				 // aNbr.withdraw(aOut);
+				 /*Get new balance*/
+				// taComment.setText("Balance: " + tmpA.getBalance());
+				 
+		 }      
+		}
 }
 
 

@@ -8,14 +8,14 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class CustomerRegister {
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
-	private ArrayList accounts;
+	private ArrayList accountList;
 	
 	/** The constructor method. The new ArrayList called accounts is 
 	 * created. The BankAccount objects will be stored in this ArrayList.
 	 *  When it is created it will be empty. The size of the ArrayList 
 	 *  does not need to be specified as an ArrayList is dynamic*/
 	public CustomerRegister() {
-		accounts = new ArrayList();
+		accountList = new ArrayList();
 	}
 	public ArrayList<Customer> getCustomers() { 
 		return this.customers;
@@ -57,8 +57,8 @@ public class CustomerRegister {
 	automatically generated Account Number will be created for this
 	customer and then added to the collection of accounts in the 
 	ArrayList */
-	public void addNewAccount(Customer customer) {
-		accounts.add(new Account(customer));
+	public void addNewAccount(Customer holder) {
+		accountList.add(new Account(holder));
 	}
 	/*public Account findAccount(String cNumber, int accountNumber) {
 		for (Customer c : this.customers) {
@@ -84,7 +84,7 @@ public class CustomerRegister {
 	public String creditAccount(int nbr, double amountIn){
 		boolean found = false;
 		String results ="";
-		ListIterator iter = accounts.listIterator();
+		ListIterator iter = accountList.listIterator();
 		while(iter.hasNext()&& !found)
 		        {
 		Account acc = (Account)iter.next();       
@@ -108,7 +108,7 @@ public class CustomerRegister {
 	public String debitAccount(int nbr, double anAmount) {
 		boolean found = false;
 		String results ="";
-		ListIterator iter = accounts.listIterator();
+		ListIterator iter = accountList.listIterator();
 		while(iter.hasNext()&& !found)
 		        {
 		Account acc = (Account)iter.next();

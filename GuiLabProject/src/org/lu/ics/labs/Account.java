@@ -7,7 +7,7 @@ public class Account {
 	 *  Account numbers will begin at 1001  */	
 	static int NEXTNUMBER = 1001;
 	private int accountNbr;
-	private String type;
+	//private String type;
 	private double balance;
 	
 	private Customer holder;
@@ -36,13 +36,13 @@ public class Account {
 	public double getBalance() {
 		return balance;
 	}
-	public String getType() {
+	/*public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-	}
+	}*/
 	public void setHolder(Customer value) {
 		this.holder = value;
 	}
@@ -62,10 +62,10 @@ public class Account {
 	return anAmount <= balance;
 	}
 
-	public Account(int accountNbr, String type) {
+	/*public Account(int accountNbr) {
 		this.accountNbr = accountNbr;
-		this.type = type;
-	}
+		//this.type = type;
+	}*/
 
 	
 
