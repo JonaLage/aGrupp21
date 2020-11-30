@@ -8,9 +8,15 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class CustomerRegister {
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
-	private ArrayList<Account>accounts = new ArrayList();
+	private ArrayList accounts;
 	
-
+	/** The constructor method. The new ArrayList called accounts is 
+	 * created. The BankAccount objects will be stored in this ArrayList.
+	 *  When it is created it will be empty. The size of the ArrayList 
+	 *  does not need to be specified as an ArrayList is dynamic*/
+	public CustomerRegister() {
+		accounts = new ArrayList();
+	}
 	public ArrayList<Customer> getCustomers() { 
 		return this.customers;
 	}
@@ -40,20 +46,28 @@ public class CustomerRegister {
 			c.setCName(newName); 
 		}
 	}
-	public void addAccount(String customerNbr, Account account) { 
+	/*public void addAccount(String customerNbr, Account account) { 
 		Customer c = this.findCustomer(customerNbr);
 		if (c != null) {
 			c.addAccount(account); 
 		}
+	}*/
+	/*A method to add a new Bank Account for an existing customer. 
+	The new BankAccount object, with a balance of £0 and an 
+	automatically generated Account Number will be created for this
+	customer and then added to the collection of accounts in the 
+	ArrayList */
+	public void addNewAccount(Customer customer) {
+		accounts.add(new Account(customer));
 	}
-	public Account findAccount(String cNumber, int accountNumber) {
-		Customer c = findCustomer(cNumber);
-		if (c != null) {
-			Account acc = c.findAccount(accountNumber);
-			return acc;
+	/*public Account findAccount(String cNumber, int accountNumber) {
+		for (Customer c : this.customers) {
+			if (c.getCNumber().equals(cNumber)) { 
+			return c;
+			}
 		}
 		return null;
-	}
+	}*/
 	public double totBalancePerson(String cNumber) {
 		double totb = 0;
 		Customer c = findCustomer(cNumber);
@@ -74,7 +88,7 @@ public class CustomerRegister {
 		while(iter.hasNext()&& !found)
 		        {
 		Account acc = (Account)iter.next();       
-		if(acc.getNbr()==nbr)
+		if(acc.getAccountNbr()==nbr)
 		             {
 		              results = acc.credit(amountIn);
 			  	found = true; // stop the loop
@@ -98,7 +112,7 @@ public class CustomerRegister {
 		while(iter.hasNext()&& !found)
 		        {
 		Account acc = (Account)iter.next();
-		   if(acc.getNbr()== nbr)
+		   if(acc.getAccountNbr()== nbr)
 		             {
 		              results = acc.debit(anAmount);
 			  	found = true;
@@ -108,5 +122,6 @@ public class CustomerRegister {
 		if(!found) results = "No such customer";
 		return results;
 		}
-
 }
+
+

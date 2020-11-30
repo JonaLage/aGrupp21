@@ -28,26 +28,29 @@ public class Customer {
 	public void setAccountList(ArrayList<Account> accountList) {
 		this.accountList = accountList;
 	}
-	public void addAccount(Account account) {
+	/*public void addAccount(Account account) {
 		accountList.add(account);
 	}
 	public Account findAccount(int accountNbr) {
 		for(Account a: accountList) {
-			if(a.getNbr() == (accountNbr)) { 
+			if(a.getAccountNbr() == (accountNbr)) { 
 				return a;
 			}
 		}
 		return null;
-	}
+	}*/
 	public double totBalance() {
 		double tot  = 0;
 		for(Account acc: accountList)  {
 			tot += acc.getBalance();
 		}
 		return tot;
+		
 	}
+	
 	public Customer(String cNumber, String cName) {
 		this.setCNumber(cNumber);
 		this.setCName(cName);
 	}
+
 }
