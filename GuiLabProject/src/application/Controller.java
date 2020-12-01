@@ -1,295 +1,197 @@
 package application;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.Collection;
 
 import org.lu.ics.labs.Account;
-//import org.lu.ics.labs.Creditcard; 
-import org.lu.ics.labs.Customer;
-import org.lu.ics.labs.CustomerRegister;
+import org.lu.ics.labs.Person;
+import org.lu.ics.labs.PersonRegister;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label; 
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class Controller {
-	
+
 	@FXML
-	private TextField txtCustName;
+	private TextField txtPersonName;
 	@FXML
-	private TextField txtCustNbr;
-	@FXML
-	private TextField txtAccountType;
+	private TextField txtPersonNbr;
 	@FXML
 	private TextField txtAccountNbr;
 	@FXML
-	private TextField txtAmount;
+	private TextField txtCredit;
+	@FXML
+	private TextField txtWithdraw;
+	@FXML
+	private TextField txtBalance;
 	@FXML
 	private Label lblResponse;
 	@FXML
 	private TextArea taComment;
-	//@FXML
-	//private RadioButton rbtnHasCard;
-	//@FXML
-	//private RadioButton rbtnNoCard;
-	
-	public ArrayList<Customer> customers = new ArrayList<Customer>();
-	public ArrayList<Account> accountList = new ArrayList<Account>();
-	CustomerRegister cReg = new CustomerRegister(); ////Kan hålla lista av customer
-
-
-	
-	
 	@FXML
-	public void btnAdd_Click(ActionEvent event) {
-		// what is the current size of the customer table (array list)
-		// this will be used to determine if the customer was added successfully
-		int element = accountList.size();
-		String cNumber = txtCustNbr.getText();
-		Customer tmpCustomer = cReg.findCustomer(cNumber); 
+	private Button btnAddPerson_Click;
 
-		// did the user enter any information in the ID box
-		if (txtCustNbr.getText().isEmpty()) {
-			lblResponse.setText("Please Enter Customer ID");
-			// return 0;
-		
-		} else {
-			cReg.addNewAccount(tmpCustomer);
-			// check to see if the customer was added to the table and return true if yes
-			// and false if not
-			if (element < accountList.size()) {
-				lblResponse.setText("Account Created successfully!");
-			} else { // notify the user that the customer was not added
-				if (element == accountList.size()) {
-					lblResponse.setText("Account Creation unsuccessful!");
-				}
-			}
-		}
-	}
-	/*lblResponse.setText("Response: New customer created.");
-	if (rbtnHasCard.isSelected()) {
-		String accountType = txtAccountType.getText();
-		int accountNbr;
-		taComment.setText("a");
-		try {
-			accountNbr = Integer.parseInt(txtAccountNbr.getText());
-			Account a = new Account(accountNbr, accountType);
-			tmpCustomer.setAccountList(accountList);
-			a.setHolder(tmpCustomer);
-			taComment.setText("b");
-		} catch (Exception e1) {
-			lblResponse.setText("Response: Error, Account Number.");
-		}
-	} else {
-		lblResponse.setText("Response: blablabla");
-	}
-	cReg.addCustomer(tmpCustomer);
-	taComment.setText("c");
-	//accountList.add(tmpCustomer); //??
-	}
-	
-		/*För att skapa ett konto:
-    - If kunden ej finns måste kunden först registrera sig. Dvs skapa ett “new name”. Meddela “Customer not found. Create new. “
-    - Else if kund finns:
-        - Generera ett unikt account number. 
-            -  If “has account” är valt: 
-                - Hitta kundens accountList 
-                - Lägg till nytt konto 
-                - Meddela kund “New account has been added to customer…”
-			else:
-                - Skapa en ny accountList 
-                - Lägg till nytt konto
-                - Meddela kund “New account has been created”. */
-		
-	/*String cNumber = txtCustNbr.getText();
-		Customer tmpCustomer = reg.findCustomer(cNumber);  
-		if (txtCustNbr.getText().isEmpty()) {
-			lblResponse.setText("Please Enter Personal Number.");
-			// return 0;
-		} else { // since no errors were detected. create new account.
-			//generate unique account number
-			Random rnd = new Random();
-			//0 to 8
-			int n1 = rnd.nextInt(9);
-			lblResponse.setText("Generated accountnumber is: ");
+	PersonRegister reg = new PersonRegister();
+	ArrayList<Account> accounts = new ArrayList<Account>();
 
-			if(rbtnHasCard.isSelected()) {
-				accountList.add(rnd);
-				}
-			}
-		}
-                
-     
-	
-	/*public void btnAddAccount_Click(ActionEvent event) {
-		boolean isAcctFound = false;
+	@FXML
+	public void btnAddAccount_Click(ActionEvent event) {
 		/*
-		// user enters 0 in the account number then generate an account number
-		if (txtCardNbr.getText().equals("0")) {
-			txtCardNbr.setText(autoAcctNum + bu.generateUniqueAccountNumber());
-		// did the user enter anything
-		} else if (txtCardNbr.getText().isEmpty()){
-			lblResponse.setText("Account Number cannot be blank!\nPlease enter Account Number or press 0 to automaticlly generate one!");
-			
-		} else {
-			// check to see if the entered account already exists
-			for (Account a: accountList) {
-				if (a.getNbr().equals(txtCardNbr.getText())) {
-					isAcctFound = true;
-				}
+		 * För att vi ska kunna "add account" så ska vi ha in pNbr och aNbr. Namn är ej
+		 * nödvändigt (vilket kan leda tll lite problem när vi printar text. Metoden
+		 * letar först efter person i personregister utifrån pNbr. Ett nytt account
+		 * skapas och kopplas till person p. Om pNbr inte har lagts till i vårt register
+		 * skrivs felmeddelande ut.
+		 */
+		String name = txtPersonName.getText();
+		String pNbr = txtPersonNbr.getText();
+		String aNbr = txtAccountNbr.getText();
+		try {
+			Person p = reg.findPerson(pNbr);
+			Account a = new Account(aNbr);
+			p.addAccount(a);
+			lblResponse.setText("Response:");
+			taComment.setText("Account " + aNbr + " added to " + name + ".");
+		} catch (Exception e) {
+			lblResponse.setText("Response:");
+			taComment.setText("Response: No person with personal number " + pNbr + " in our register."
+					+ " Please add new customer.");
+		}
+	}
+
+	@FXML
+	public void btnFindPerson_Click(ActionEvent event) {
+		/*
+		 * För att hitta person ska vi ha in pNbr. Vi söker sedan efter pNbr i
+		 * personregister. If personen finns: Skriv ut namn och accounts. If personen
+		 * har accounts, skriv ut accounts. Else om kund ej har skrivit in pNbr i
+		 * textrutan så får den upp felmeddelande: please enter... Else om kund ej finns
+		 * i registret så får den upp felmeddelande: customer does not...
+		 */
+		String pNbr = txtPersonNbr.getText();
+		Person p = reg.findPerson(pNbr);
+		if (p != null) {
+			lblResponse.setText("Response:");
+			taComment.setText("Customer name: " + p.getName() + "\nAccounts: " + p.getAccounts());
+			if (p.getAccounts() != null) {
+				accounts = p.getAccounts();
 			}
-			// notify user account already exists
-			if (isAcctFound) {
-				lblResponse.setText("Account Number already used! Please choose a different Account Number!");
-				
-			// notify user the account number can be used
+		} else {
+			if (txtPersonNbr.getText().isEmpty()) {
+				lblResponse.setText("Response:");
+				taComment.setText("Please enter personal number.");
 			} else {
-				lblResponse.setText("Account Number accepted!");
+				lblResponse.setText("Response:");
+				taComment.setText("Customer does not exist.");
 			}
-		}*/
-		
-	
-	@FXML
-	public void btnFind_Click(ActionEvent event) {
-		String cNumber = txtCustNbr.getText();
-		Customer tmpCustomer = cReg.findCustomer(cNumber); 
-		while(txtCustNbr.getText().isEmpty()) {
-		lblResponse.setText("Please enter personal number");
 		}
-		if (cNumber != null){
-			for (Customer c : customers) {
-				taComment.setText("Customer name: " +c.getCName()+ "\nAccounts: "+c.getAccountList());
-			}
-		} else /*if (!cNumber.equals(tmpCustomer.getCNumber()))*/ {
-				lblResponse.setText("Customer does not exist.");
-		}
-			
+
 	}
-	
-	
-	
 
-		/*String cNumber = txtCustNbr.getText();
-		Customer tmpCustomer = reg.findCustomer(cNumber);
-		if (txtCustNbr.getText().isEmpty()) {
-			lblResponse.setText("Please enter personal number");
-		} else if
-		getAccountList
-
-			
-			lblResponse.setText("Response: hej hej");
-			txtCustNbr.setText(tmpCustomer.getCNumber());
-			txtCustName.setText(tmpCustomer.getCName());
-				if (tmpCustomer.getAccountList() != null) {
-					ArrayList<Account> acc = tmpCustomer.getAccountList();
-					//txtAccountNbr.setText(Integer.toString(acc.get()));
-				rbtnHasCard.setSelected(true);
-			} else {
-				txtAccountType.setText("");
-				txtAccountNbr.setText("");
-				rbtnNoCard.setSelected(true);
-			}
+	@FXML
+	// FUNKAR
+	public void btnDeletePerson_Click(ActionEvent event) {
+		/*
+		 * För att radera en person så behöver vi få in pNbr. If täxtfältet är tomt får
+		 * kunden upp felmeddelande: plese enter... Else raderar programmet personen
+		 * från registret.
+		 */
+		String pNbr = txtPersonNbr.getText();
+		if (txtPersonNbr.getText().isEmpty()) {
+			lblResponse.setText("Response:");
+			taComment.setText("Please Enter Customer ID to delete.");
 		} else {
-			lblResponse.setText("Response: Customer not found");
-			}
-			
-			}*/
-
-
-	@FXML
-	public void btnDelete_Click(ActionEvent event) {
-		
-		String cNumber = txtCustNbr.getText();
-		if (txtCustNbr.getText().isEmpty()) {
-			lblResponse.setText("Please Enter Customer ID to delete.");
-		}  else {
-		cReg.removeCustomer(cNumber);
-		lblResponse.setText("Response: Customer " +txtCustNbr.getText()+ " deleted.");
+			lblResponse.setText("Response:");
+			reg.removePerson(pNbr);
+			taComment.setText("Customer " + pNbr + " has been deleted.");
 		}
 	}
-		
 
 	@FXML
-	public void btnNewName_Click(ActionEvent event) {
-		// what is the current size of the customer table (array list)
-		// this will be used to determine if the customer was added successfully
-		int element = customers.size();
-		String cNumber = txtCustNbr.getText();
-		Customer tmpCustomer = cReg.findCustomer(cNumber);
-		
-		// did the user enter any information in the ID box
-		if (txtCustNbr.getText().isEmpty()) {
-			lblResponse.setText("Please Enter Customer ID");
-			// return 0;
-		} else if (txtCustName.getText().isEmpty()) { // did the user enter any information in the Name box
-			lblResponse.setText("Please Enter Customer Name");
-			// return 1;
-		} else { // since there were no errors that I detected, add the customer to the table
-			for (Customer c : customers) {
-				if (c.getCNumber().equals(txtCustNbr.getText())) {
-					lblResponse.setText("Customer ID already Exists!");
-				}
-			}
-			Customer customer = new Customer(txtCustNbr.getText(), txtCustName.getText());
-			customers.add(customer);
-			//cReg.addCustomer(tmpCustomer);
-			String newName = txtCustName.getText();
-			cReg.setCustomerName(cNumber, newName);
-			// check to see if the customer was added to the table and return true if yes
-			// and false if not
-			if (element < customers.size()) {
-				lblResponse.setText("Customer Created successfully!");
-			} else { // notify the user that the customer was not added
-				if (element == customers.size()) {
-					lblResponse.setText("Customer Creation unsuccessful!");
-				}
-			}
-		}
+	public void btnAddPerson_Click(ActionEvent event) {
+		/*
+		 * För att lägga till en person behöver vi namn och personnummber. En ny person
+		 * skapas och läggs till i registret.
+		 */
+		String name = txtPersonName.getText();
+		String pNbr = txtPersonNbr.getText();
+		Person p = new Person(pNbr, name);
+		reg.addPerson(p);
+		lblResponse.setText("Response:");
+		taComment.setText(name + " with personal number " + pNbr + " has been added to the register.");
+
 	}
-	
-		/*String cNumber = txtCustNbr.getText();
-		Customer tmpCustomer = reg.findCustomer(cNumber);
-		/*if (tmpCustomer != null) {
-			lblResponse.setText("Response: New customer created.");
-			String newName = txtCustName.getText();
-			reg.setCustomerName(cNumber, newName);
+
+	@FXML
+	public void btnCredit_Click(ActionEvent event) {
+		/*
+		 * För att kunna göra insättning behöver vi pNbr och aNbr. Vi letar fram det
+		 * account som har skapats med samma pNbr och aNbr och lägger till den summan
+		 * som har skrivit in i textfältet. Förbättringsmöjlighet: att lägga en limt på
+		 * hur mycket man får sätta in.
+		 */
+		String pNbr = txtPersonNbr.getText();
+		String aNbr = txtAccountNbr.getText();
+		double credit = Double.parseDouble(txtCredit.getText());
+		Account a = reg.findAccount(pNbr, aNbr);
+		a.credit(credit);
+		lblResponse.setText("Response:");
+		taComment.setText("Added " + credit + " kr to " + aNbr);
+
+	}
+
+	@FXML
+	public void btnWithdraw_Click(ActionEvent event) {
+		/*
+		 * Samma som insättning. Om debit <= balance så kan uttag genomföras. Om debit
+		 * >= balance så får kunden upp insufficient amount.
+		 */
+		String pNbr = txtPersonNbr.getText();
+		String aNbr = txtAccountNbr.getText();
+		double debit = Double.parseDouble(txtWithdraw.getText());
+		Account a = reg.findAccount(pNbr, aNbr);
+		if (a.canDebit(debit) == true) {
+			a.debit(debit);
+			lblResponse.setText("Response:");
+			taComment.setText("Withdrew " + debit + " kr from " + aNbr);
 		} else {
-			lblResponse.setText("Response: New customer could not be created.");
+			lblResponse.setText("Response:");
+			taComment.setText("Insufficient amount.");
 		}
-		*/
-		
-		@FXML
-		public void btnCredit_Click(ActionEvent event) {
-			
-		
-			double aIn  = Integer.parseInt(txtAmount.getText());
-			int aNbr = Integer.parseInt(txtAccountNbr.getText());
-			
-			cReg.creditAccount(aNbr, aIn ); 
-			//taComment.setText("Account " +aNbr.getAccountNbr()+ " has been credited: $"+tmpA.credit(aIn));
+	}
 
-		}
-		@FXML
-		public void btnWithdraw_Click(ActionEvent event) {
-			 {   /*Get value from field*/
-				double aOut = Double.parseDouble(txtAmount.getText());
-				int aNbr = Integer.parseInt(txtAccountNbr.getText());
-				 
-					
-				 cReg.debitAccount(aNbr, aOut);
-				/*Withdraw passing value needed to withdraw as an argument*/
-				 // aNbr.withdraw(aOut);
-				 /*Get new balance*/
-				// taComment.setText("Balance: " + tmpA.getBalance());
-				 
-		 }      
-		}
+	@FXML
+	public void btnBalance_Click(ActionEvent event) {
+		/*
+		 * Behöver pNbr för att kolla balans. Letar fram person ur registret och tar
+		 * fram den total balansen för personen.
+		 */
+		double balance;
+		String pNbr = txtPersonNbr.getText();
+		Person p = reg.findPerson(pNbr);
+		balance = p.totalBalance();
+		lblResponse.setText("Response:");
+		taComment.setText("Your balance is " + balance + " kr.");
+	}
+
+	@FXML
+	public void btnViewAccounts_Click(ActionEvent event) {
+		/*
+		 * För att view account måste vi pNbr. Letar fram person ur registret och tar
+		 * fram personens accounts och lägger den i listan accounts. Ska sedan skriva ut
+		 * alla accounts men gör det inte utan skriver bara ut den senaste. Får den ej
+		 * att funka. Förbättringsmöjlighet: Ifall kunden ej har accounts så ska
+		 * felmeddelande skrivas ut. Har testat men blev död kod.
+		 */
+		String pNbr = txtPersonNbr.getText();
+		Person p = reg.findPerson(pNbr);
+		accounts = p.getAccounts();
+		lblResponse.setText("Response:");
+		taComment.setText("All accounts under customer id: " + pNbr);
+		for (Account tmp : accounts)
+			taComment.setText("Account: " + tmp);
+	}
 }
-
-
