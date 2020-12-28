@@ -45,19 +45,24 @@ public class CourseMenu extends javax.swing.JFrame {
 
         Background = new javax.swing.JPanel();
         Sidepanel = new javax.swing.JPanel();
-        jPanelView = new javax.swing.JPanel();
-        jButtonViewCourse = new javax.swing.JButton();
-        jPanelManage = new javax.swing.JPanel();
-        jButtonCreateCourse = new javax.swing.JButton();
+        jPanelViewResults = new javax.swing.JPanel();
+        jButtonViewResults = new javax.swing.JButton();
+        jPanelManageCourse = new javax.swing.JPanel();
+        jButtonManageCourse = new javax.swing.JButton();
         jPanelHome = new javax.swing.JPanel();
         jHomeButton = new javax.swing.JButton();
+        jPanelViewExams = new javax.swing.JPanel();
+        jButtonViewExams = new javax.swing.JButton();
+        jCourseBackgroundPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMenu = new javax.swing.JTable();
-        jTextFilter = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jCourseLabel = new javax.swing.JLabel();
+        jCourseSearchFilter = new javax.swing.JTextField();
+        jCourseComboBox2 = new javax.swing.JComboBox<>();
+        jBlueLinePanelC = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(930, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Background.setBackground(new java.awt.Color(250, 250, 250));
@@ -66,77 +71,76 @@ public class CourseMenu extends javax.swing.JFrame {
         Sidepanel.setBackground(new java.awt.Color(23, 35, 51));
         Sidepanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanelView.setBackground(new java.awt.Color(23, 35, 51));
+        jPanelViewResults.setBackground(new java.awt.Color(23, 35, 51));
 
-        jButtonViewCourse.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
-        jButtonViewCourse.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonViewCourse.setText("View Course");
-        jButtonViewCourse.setBorder(null);
-        jButtonViewCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonViewResults.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        jButtonViewResults.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonViewResults.setText("View Results");
+        jButtonViewResults.setBorder(null);
+        jButtonViewResults.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonViewCourseMouseEntered(evt);
+                jButtonViewResultsMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonViewCourseMouseExited(evt);
+                jButtonViewResultsMouseExited(evt);
             }
         });
-        jButtonViewCourse.addActionListener(new java.awt.event.ActionListener() {
+        jButtonViewResults.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonViewCourseActionPerformed(evt);
+                jButtonViewResultsActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanelViewLayout = new javax.swing.GroupLayout(jPanelView);
-        jPanelView.setLayout(jPanelViewLayout);
-        jPanelViewLayout.setHorizontalGroup(
-            jPanelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelViewLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelViewResultsLayout = new javax.swing.GroupLayout(jPanelViewResults);
+        jPanelViewResults.setLayout(jPanelViewResultsLayout);
+        jPanelViewResultsLayout.setHorizontalGroup(
+            jPanelViewResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonViewResults, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+        );
+        jPanelViewResultsLayout.setVerticalGroup(
+            jPanelViewResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelViewResultsLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonViewCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanelViewLayout.setVerticalGroup(
-            jPanelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonViewCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(jButtonViewResults, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Sidepanel.add(jPanelView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 220, 60));
+        Sidepanel.add(jPanelViewResults, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 190, 60));
 
-        jPanelManage.setBackground(new java.awt.Color(23, 35, 51));
+        jPanelManageCourse.setBackground(new java.awt.Color(23, 35, 51));
 
-        jButtonCreateCourse.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
-        jButtonCreateCourse.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCreateCourse.setText("Manage Course");
-        jButtonCreateCourse.setBorder(null);
-        jButtonCreateCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonManageCourse.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        jButtonManageCourse.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonManageCourse.setText("Manage Course");
+        jButtonManageCourse.setBorder(null);
+        jButtonManageCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonCreateCourseMouseEntered(evt);
+                jButtonManageCourseMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonCreateCourseMouseExited(evt);
+                jButtonManageCourseMouseExited(evt);
             }
         });
-        jButtonCreateCourse.addActionListener(new java.awt.event.ActionListener() {
+        jButtonManageCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCreateCourseActionPerformed(evt);
+                jButtonManageCourseActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanelManageLayout = new javax.swing.GroupLayout(jPanelManage);
-        jPanelManage.setLayout(jPanelManageLayout);
-        jPanelManageLayout.setHorizontalGroup(
-            jPanelManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelManageLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonCreateCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPanelManageCourseLayout = new javax.swing.GroupLayout(jPanelManageCourse);
+        jPanelManageCourse.setLayout(jPanelManageCourseLayout);
+        jPanelManageCourseLayout.setHorizontalGroup(
+            jPanelManageCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonManageCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
-        jPanelManageLayout.setVerticalGroup(
-            jPanelManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonCreateCourse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        jPanelManageCourseLayout.setVerticalGroup(
+            jPanelManageCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonManageCourse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        Sidepanel.add(jPanelManage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 220, 60));
+        Sidepanel.add(jPanelManageCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 190, 60));
 
         jPanelHome.setBackground(new java.awt.Color(23, 35, 51));
+        jPanelHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jHomeButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         jHomeButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,25 +154,47 @@ public class CourseMenu extends javax.swing.JFrame {
                 jHomeButtonMouseExited(evt);
             }
         });
+        jPanelHome.add(jHomeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 60));
 
-        javax.swing.GroupLayout jPanelHomeLayout = new javax.swing.GroupLayout(jPanelHome);
-        jPanelHome.setLayout(jPanelHomeLayout);
-        jPanelHomeLayout.setHorizontalGroup(
-            jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHomeLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+        Sidepanel.add(jPanelHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 190, 60));
+
+        jPanelViewExams.setBackground(new java.awt.Color(23, 35, 51));
+
+        jButtonViewExams.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        jButtonViewExams.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonViewExams.setText("View Exams");
+        jButtonViewExams.setBorder(null);
+        jButtonViewExams.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonViewExamsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonViewExamsMouseExited(evt);
+            }
+        });
+        jButtonViewExams.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonViewExamsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelViewExamsLayout = new javax.swing.GroupLayout(jPanelViewExams);
+        jPanelViewExams.setLayout(jPanelViewExamsLayout);
+        jPanelViewExamsLayout.setHorizontalGroup(
+            jPanelViewExamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonViewExams, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
-        jPanelHomeLayout.setVerticalGroup(
-            jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHomeLayout.createSequentialGroup()
-                .addComponent(jHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanelViewExamsLayout.setVerticalGroup(
+            jPanelViewExamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonViewExams, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        Sidepanel.add(jPanelHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 220, 60));
+        Sidepanel.add(jPanelViewExams, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 190, 60));
 
-        Background.add(Sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 683));
+        Background.add(Sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 680));
+
+        jCourseBackgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
+        jCourseBackgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableMenu.setFont(new java.awt.Font("Avenir Next", 0, 12)); // NOI18N
         jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
@@ -183,48 +209,54 @@ public class CourseMenu extends javax.swing.JFrame {
         jTableMenu.setSelectionBackground(new java.awt.Color(61, 97, 155));
         jScrollPane1.setViewportView(jTableMenu);
 
-        Background.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 644, 426));
+        jCourseBackgroundPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 620, 440));
 
-        jTextFilter.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jTextFilter.setText("Search...");
-        jTextFilter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jTextFilter.addMouseListener(new java.awt.event.MouseAdapter() {
+        jCourseLabel.setFont(new java.awt.Font("Futura", 0, 30)); // NOI18N
+        jCourseLabel.setText("Course Overview ");
+        jCourseBackgroundPanel.add(jCourseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        jCourseSearchFilter.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jCourseSearchFilter.setText("Search...");
+        jCourseSearchFilter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jCourseSearchFilter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFilterMouseClicked(evt);
+                jCourseSearchFilterMouseClicked(evt);
             }
         });
-        jTextFilter.addActionListener(new java.awt.event.ActionListener() {
+        jCourseSearchFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFilterActionPerformed(evt);
+                jCourseSearchFilterActionPerformed(evt);
             }
         });
-        jTextFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+        jCourseSearchFilter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFilterKeyReleased(evt);
+                jCourseSearchFilterKeyReleased(evt);
             }
         });
-        Background.add(jTextFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 170, 200, 27));
+        jCourseBackgroundPanel.add(jCourseSearchFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 150, 27));
 
-        jPanel1.setBackground(new java.awt.Color(23, 35, 51));
+        jCourseComboBox2.setFont(new java.awt.Font("Avenir Next", 0, 14)); // NOI18N
+        jCourseComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select course", "Item 2", "Item 3", "Item 4" }));
+        jCourseBackgroundPanel.add(jCourseComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 170, 27));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+        jBlueLinePanelC.setBackground(new java.awt.Color(23, 35, 51));
+
+        javax.swing.GroupLayout jBlueLinePanelCLayout = new javax.swing.GroupLayout(jBlueLinePanelC);
+        jBlueLinePanelC.setLayout(jBlueLinePanelCLayout);
+        jBlueLinePanelCLayout.setHorizontalGroup(
+            jBlueLinePanelCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
+        jBlueLinePanelCLayout.setVerticalGroup(
+            jBlueLinePanelCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        Background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 780, 2));
+        jCourseBackgroundPanel.add(jBlueLinePanelC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 740, 3));
 
-        jLabel1.setFont(new java.awt.Font("Futura", 0, 30)); // NOI18N
-        jLabel1.setText("Course Overview");
-        Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
+        Background.add(jCourseBackgroundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 740, 680));
 
-        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, -1));
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,41 +267,32 @@ public class CourseMenu extends javax.swing.JFrame {
     public void resetColor(JPanel p) {
         p.setBackground(new Color(23,35,51));
     }
-    private void jButtonCreateCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateCourseActionPerformed
+    private void jButtonManageCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageCourseActionPerformed
         new CreateCourse().setVisible(true);  
-    }//GEN-LAST:event_jButtonCreateCourseActionPerformed
+    }//GEN-LAST:event_jButtonManageCourseActionPerformed
     public static void AddRowToJTable(Object [] dataRow) {
         DefaultTableModel model = (DefaultTableModel)jTableMenu.getModel();
         model.addRow(dataRow);
-    }
-    private void jTextFilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFilterKeyReleased
-        String query = jTextFilter.getText().toLowerCase();
-        filter(query);
-    }//GEN-LAST:event_jTextFilterKeyReleased
+    } 
+    private void jButtonViewResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewResultsActionPerformed
+        new ViewResults().setVisible(true);
+    }//GEN-LAST:event_jButtonViewResultsActionPerformed
 
-    private void jButtonViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewCourseActionPerformed
-        new ViewCourse().setVisible(true);
-    }//GEN-LAST:event_jButtonViewCourseActionPerformed
+    private void jButtonViewResultsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonViewResultsMouseEntered
+        setColor(jPanelViewResults);
+    }//GEN-LAST:event_jButtonViewResultsMouseEntered
 
-    private void jTextFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFilterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFilterActionPerformed
+    private void jButtonViewResultsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonViewResultsMouseExited
+        resetColor(jPanelViewResults);
+    }//GEN-LAST:event_jButtonViewResultsMouseExited
 
-    private void jButtonViewCourseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonViewCourseMouseEntered
-        setColor(jPanelView);
-    }//GEN-LAST:event_jButtonViewCourseMouseEntered
+    private void jButtonManageCourseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonManageCourseMouseEntered
+        setColor(jPanelManageCourse);
+    }//GEN-LAST:event_jButtonManageCourseMouseEntered
 
-    private void jButtonViewCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonViewCourseMouseExited
-        resetColor(jPanelView);
-    }//GEN-LAST:event_jButtonViewCourseMouseExited
-
-    private void jButtonCreateCourseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCreateCourseMouseEntered
-        setColor(jPanelManage);
-    }//GEN-LAST:event_jButtonCreateCourseMouseEntered
-
-    private void jButtonCreateCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCreateCourseMouseExited
-        resetColor(jPanelManage);
-    }//GEN-LAST:event_jButtonCreateCourseMouseExited
+    private void jButtonManageCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonManageCourseMouseExited
+        resetColor(jPanelManageCourse);
+    }//GEN-LAST:event_jButtonManageCourseMouseExited
 
     private void jHomeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHomeButtonMouseEntered
         setColor(jPanelHome);
@@ -279,9 +302,29 @@ public class CourseMenu extends javax.swing.JFrame {
         resetColor(jPanelHome);
     }//GEN-LAST:event_jHomeButtonMouseExited
 
-    private void jTextFilterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFilterMouseClicked
-        jTextFilter.setText("");
-    }//GEN-LAST:event_jTextFilterMouseClicked
+    private void jCourseSearchFilterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCourseSearchFilterMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCourseSearchFilterMouseClicked
+
+    private void jCourseSearchFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCourseSearchFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCourseSearchFilterActionPerformed
+
+    private void jCourseSearchFilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCourseSearchFilterKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCourseSearchFilterKeyReleased
+
+    private void jButtonViewExamsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonViewExamsMouseEntered
+        setColor(jPanelViewExams);
+    }//GEN-LAST:event_jButtonViewExamsMouseEntered
+
+    private void jButtonViewExamsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonViewExamsMouseExited
+        resetColor(jPanelViewExams);
+    }//GEN-LAST:event_jButtonViewExamsMouseExited
+
+    private void jButtonViewExamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewExamsActionPerformed
+        new ViewExams().setVisible(true);
+    }//GEN-LAST:event_jButtonViewExamsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,16 +365,20 @@ public class CourseMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JPanel Sidepanel;
-    private javax.swing.JButton jButtonCreateCourse;
-    private javax.swing.JButton jButtonViewCourse;
+    private javax.swing.JPanel jBlueLinePanelC;
+    private javax.swing.JButton jButtonManageCourse;
+    private javax.swing.JButton jButtonViewExams;
+    private javax.swing.JButton jButtonViewResults;
+    private javax.swing.JPanel jCourseBackgroundPanel;
+    private javax.swing.JComboBox<String> jCourseComboBox2;
+    private javax.swing.JLabel jCourseLabel;
+    private javax.swing.JTextField jCourseSearchFilter;
     private javax.swing.JButton jHomeButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelHome;
-    private javax.swing.JPanel jPanelManage;
-    private javax.swing.JPanel jPanelView;
+    private javax.swing.JPanel jPanelManageCourse;
+    private javax.swing.JPanel jPanelViewExams;
+    private javax.swing.JPanel jPanelViewResults;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTableMenu;
-    private javax.swing.JTextField jTextFilter;
     // End of variables declaration//GEN-END:variables
 }

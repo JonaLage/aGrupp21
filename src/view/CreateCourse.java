@@ -70,13 +70,13 @@ public class CreateCourse extends javax.swing.JFrame {
         jTextCourseName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextCredit = new javax.swing.JTextField();
-        jButtonSave = new javax.swing.JButton();
+        jCreateButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButtonGenerate = new javax.swing.JButton();
-        jCourseCode = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jTextCourseCode = new javax.swing.JTextField();
+        jDeleteButton = new javax.swing.JButton();
+        jSaveButton = new javax.swing.JButton();
+        jCancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -84,7 +84,7 @@ public class CreateCourse extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
-        jLabel1.setText("Manage Courses");
+        jLabel1.setText("Manage Course");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 48, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
@@ -101,14 +101,14 @@ public class CreateCourse extends javax.swing.JFrame {
         jTextCredit.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jPanel1.add(jTextCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 92, 34));
 
-        jButtonSave.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jButtonSave.setText("Add course");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        jCreateButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jCreateButton.setText("Create course");
+        jCreateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                jCreateButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 314, 124, -1));
+        jPanel1.add(jCreateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 314, 124, -1));
 
         jLabel4.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jLabel4.setText("Course code");
@@ -123,30 +123,30 @@ public class CreateCourse extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonGenerate, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 174, 113, -1));
 
-        jCourseCode.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jCourseCode.addActionListener(new java.awt.event.ActionListener() {
+        jTextCourseCode.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jTextCourseCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCourseCodeActionPerformed(evt);
+                jTextCourseCodeActionPerformed(evt);
             }
         });
-        jPanel1.add(jCourseCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 92, 35));
+        jPanel1.add(jTextCourseCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 92, 35));
 
-        jButton1.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
-        jButton1.setText("Delete course");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 314, -1, -1));
+        jDeleteButton.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
+        jDeleteButton.setText("Delete course");
+        jPanel1.add(jDeleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 314, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jButton2.setText("Save update");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 314, 124, -1));
+        jSaveButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jSaveButton.setText("Save update");
+        jPanel1.add(jSaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 314, 124, -1));
 
-        jButton3.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jButton3.setText("Cancel");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jCancelButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jCancelButton.setText("Cancel");
+        jCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jCancelButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 378, 125, -1));
+        jPanel1.add(jCancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 378, 125, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,34 +168,66 @@ public class CreateCourse extends javax.swing.JFrame {
     int end = 99999; 
     int result = r.nextInt(end-start) + start; 
     String code = "C" + String.valueOf(result);
-    jCourseCode.setText(code); 
+    jTextCourseCode.setText(code); 
     }//GEN-LAST:event_jButtonGenerateActionPerformed
 
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        CourseMenu.AddRowToJTable(new Object[]{
-            jCourseCode.getText(), jTextCourseName.getText(), jTextCredit.getText()});
-
-    if(jTextCourseName.getText().isEmpty() || jTextCredit.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please enter all fields!");
+    private void jCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateButtonActionPerformed
+        final int NUM_FIELDS = 3;
+        int numCorrectFields = 0;
+        boolean valid = true;
+        boolean flag = true;  
+        
+   
+        //Check course name
+        if (jTextCourseName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Course has no name!\nPlease enter a course name."); 
+        } else {
+            courseName = jTextCourseName.getText();
+            numCorrectFields++;
         }
-        else {
-            String courseCode = jCourseCode.getText().trim();
-            String name = jTextCourseName.getText().trim();
-            String credit = jTextCredit.getText().trim();
-           
-
-            /*Course course = new Course(courseCode, name, credit);*/
+        
+        //Check course code 
+        String regex = "^[C][1-9][0-9]{4}$";
+        String input = jTextCourseCode.getText();
+        valid = input.matches(regex);
+        if (jTextCourseCode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "A course must have a course code!\nPlease enter or generate a course code.");
+        } else if(!valid) {
+            JOptionPane.showMessageDialog(null, "Invalid course code\nCourse code must follow the format 'C'+ 5 numbers.");
+        } else {
+            courseCode = jTextCourseCode.getText();
+            numCorrectFields++;
         }
+     
+        //Check credit 
+        if (jTextCredit.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Course is missing credits!\nPlease enter course credit.");
+        } else {
+            try {
+            courseCredit = Double.parseDouble(jTextCredit.getText());
+            numCorrectFields++;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid course credit.\nPlease enter a number.");
+            }
+        }
+        
+        //Check if all fields are correct  
+         if (numCorrectFields < NUM_FIELDS) {
+             JOptionPane.showMessageDialog(null, "Course could not be created.\nPlease try again.");   
+         } else {
+            CourseMenu.AddRowToJTable(new Object[]{
+                courseCode, courseName, courseCredit});
+                JOptionPane.showMessageDialog(null, "Course successfully created!"); 
+         }
+    }//GEN-LAST:event_jCreateButtonActionPerformed
 
-    }//GEN-LAST:event_jButtonSaveActionPerformed
-
-    private void jCourseCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCourseCodeActionPerformed
+    private void jTextCourseCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCourseCodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCourseCodeActionPerformed
+    }//GEN-LAST:event_jTextCourseCodeActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelButtonActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jCancelButtonActionPerformed
    
  
     /**
@@ -234,20 +266,24 @@ public class CreateCourse extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonGenerate;
-    private javax.swing.JButton jButtonSave;
-    private javax.swing.JTextField jCourseCode;
+    private javax.swing.JButton jCancelButton;
+    private javax.swing.JButton jCreateButton;
+    private javax.swing.JButton jDeleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jSaveButton;
+    private javax.swing.JTextField jTextCourseCode;
     private javax.swing.JTextField jTextCourseName;
     private javax.swing.JTextField jTextCredit;
     // End of variables declaration//GEN-END:variables
    private CourseController coursecontroller; 
    private Course course; 
+   private String courseName;
+   private String courseCode; 
+   private double courseCredit; 
+   
 }

@@ -7,20 +7,30 @@ package view;
 
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author jackie-sally
  */
-public class ViewCourse extends javax.swing.JFrame {
-
+public class ViewExams extends javax.swing.JFrame {
+    
+    DefaultTableModel dm;
     /**
      * Creates new form ViewCourse
      */
-    public ViewCourse() {
+    public ViewExams() {
         initComponents();
     }
-
+    //Filter data
+    private void filter(String query) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(dm);
+        jExamTable.setRowSorter(tr);
+        
+        tr.setRowFilter(RowFilter.regexFilter(query));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,79 +40,30 @@ public class ViewCourse extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCourseLabel = new javax.swing.JLabel();
-        jExamScrollPane = new javax.swing.JScrollPane();
-        jExamTable = new javax.swing.JTable();
-        jSearchField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jViewPanel = new javax.swing.JPanel();
-        jViewExamButton = new javax.swing.JButton();
         jManagePanel = new javax.swing.JPanel();
         jEditExamButton = new javax.swing.JButton();
         jExitPanel = new javax.swing.JPanel();
         jExitButton = new javax.swing.JButton();
+        jCourseLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jCourseLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jSearchField = new javax.swing.JTextField();
+        jExamScrollPane = new javax.swing.JScrollPane();
+        jExamTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(250, 250, 250));
-
-        jCourseLabel.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
-        jCourseLabel.setText("Course view");
-
-        jExamTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Exam ID", "Date", "Time", "Location"
-            }
-        ));
-        jExamScrollPane.setViewportView(jExamTable);
-
-        jSearchField.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jSearchField.setText("Search...");
-        jSearchField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jSearchFieldMouseClicked(evt);
-            }
-        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(23, 35, 51));
+        jPanel1.setPreferredSize(new java.awt.Dimension(220, 540));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jViewPanel.setBackground(new java.awt.Color(23, 35, 51));
-
-        jViewExamButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
-        jViewExamButton.setForeground(new java.awt.Color(255, 255, 255));
-        jViewExamButton.setText("View exam");
-        jViewExamButton.setBorder(null);
-        jViewExamButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jViewExamButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jViewExamButtonMouseExited(evt);
-            }
-        });
-        jViewExamButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jViewExamButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jViewPanelLayout = new javax.swing.GroupLayout(jViewPanel);
-        jViewPanel.setLayout(jViewPanelLayout);
-        jViewPanelLayout.setHorizontalGroup(
-            jViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jViewExamButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-        );
-        jViewPanelLayout.setVerticalGroup(
-            jViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jViewPanelLayout.createSequentialGroup()
-                .addComponent(jViewExamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 210, 60));
 
         jManagePanel.setBackground(new java.awt.Color(23, 35, 51));
 
@@ -128,14 +89,14 @@ public class ViewCourse extends javax.swing.JFrame {
         jManagePanel.setLayout(jManagePanelLayout);
         jManagePanelLayout.setHorizontalGroup(
             jManagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jEditExamButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+            .addComponent(jEditExamButton, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
         );
         jManagePanelLayout.setVerticalGroup(
             jManagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jEditExamButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jManagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, 60));
+        jPanel1.add(jManagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 210, 60));
 
         jExitPanel.setBackground(new java.awt.Color(23, 35, 51));
 
@@ -172,34 +133,95 @@ public class ViewCourse extends javax.swing.JFrame {
 
         jPanel1.add(jExitPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 210, 60));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jCourseLabel)
-                            .addGap(492, 492, 492)))
-                    .addComponent(jExamScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+        jCourseLabel.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        jCourseLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jCourseLabel.setText("Or select course below");
+        jPanel1.add(jCourseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Exams");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 210, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jCourseLabel)
-                .addGap(39, 39, 39)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 81, 210, 3));
+
+        jComboBox1.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select course", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, -1));
+
+        jCourseLabel1.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        jCourseLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jCourseLabel1.setText("View course:");
+        jPanel1.add(jCourseLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jTextField1.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jTextField1.setText("Type in course code");
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 150, 30));
+
+        jButton1.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jButton1.setText("View");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 150, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 690));
+
+        jPanel2.setBackground(new java.awt.Color(245, 245, 245));
+
+        jSearchField.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jSearchField.setText("Search...");
+        jSearchField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jSearchFieldMouseClicked(evt);
+            }
+        });
+
+        jExamScrollPane.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+
+        jExamTable.setFont(new java.awt.Font("Avenir Next", 0, 12)); // NOI18N
+        jExamTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Course code", "Course", "Exam ID", "Date", "Time", "Location"
+            }
+        ));
+        jExamScrollPane.setViewportView(jExamTable);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jExamScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jExamScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jExamScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 800, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,21 +232,13 @@ public class ViewCourse extends javax.swing.JFrame {
     public void resetColor(JPanel p) {
         p.setBackground(new Color(23,35,51));
     }
-    private void jViewExamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewExamButtonActionPerformed
-        new ViewExam().setVisible(true);
-    }//GEN-LAST:event_jViewExamButtonActionPerformed
-
+    public static void AddRowToJTable(Object [] dataRow) {
+        DefaultTableModel model = (DefaultTableModel)jExamTable.getModel();
+        model.addRow(dataRow);
+    }
     private void jExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExitButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_jExitButtonActionPerformed
-
-    private void jViewExamButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jViewExamButtonMouseEntered
-        setColor(jViewPanel);
-    }//GEN-LAST:event_jViewExamButtonMouseEntered
-
-    private void jViewExamButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jViewExamButtonMouseExited
-        resetColor(jViewPanel);
-    }//GEN-LAST:event_jViewExamButtonMouseExited
 
     private void jExitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jExitButtonMouseEntered
         setColor(jExitPanel);
@@ -280,22 +294,27 @@ public class ViewCourse extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCourse().setVisible(true);
+                new ViewExams().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jCourseLabel;
+    private javax.swing.JLabel jCourseLabel1;
     private javax.swing.JButton jEditExamButton;
     private javax.swing.JScrollPane jExamScrollPane;
-    private javax.swing.JTable jExamTable;
+    private static javax.swing.JTable jExamTable;
     private javax.swing.JButton jExitButton;
     private javax.swing.JPanel jExitPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jManagePanel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jSearchField;
-    private javax.swing.JButton jViewExamButton;
-    private javax.swing.JPanel jViewPanel;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

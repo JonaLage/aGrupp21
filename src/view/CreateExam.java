@@ -5,19 +5,25 @@
  */
 package view;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.WrittenExam;
+import java.util.*;
 /**
  *
  * @author jackie-sally
  */
 public class CreateExam extends javax.swing.JFrame {
     
+    ArrayList<WrittenExam> exams; 
+   
     /**
      * Creates new form CreateExam
      */
     public CreateExam() {
         initComponents();
-        
+        exams = new ArrayList<WrittenExam>(); 
     }
 
     /**
@@ -36,7 +42,7 @@ public class CreateExam extends javax.swing.JFrame {
         jDateLabel = new javax.swing.JLabel();
         jSelectTimeLabel = new javax.swing.JLabel();
         jLocationLabel = new javax.swing.JLabel();
-        jAddCourseButton = new javax.swing.JButton();
+        jCreateExamButton = new javax.swing.JButton();
         jTimeComboBox = new javax.swing.JComboBox<>();
         jDateDay = new javax.swing.JTextField();
         jTextLocation = new javax.swing.JTextField();
@@ -49,11 +55,8 @@ public class CreateExam extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jResetButton = new javax.swing.JButton();
         jCancelButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jExamTable = new javax.swing.JTable();
         jUpdateButton = new javax.swing.JButton();
         jDeleteButton = new javax.swing.JButton();
-        jSearchField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,6 +70,11 @@ public class CreateExam extends javax.swing.JFrame {
 
         jCourseComboBox.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Make a Selection", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCourseComboBoxActionPerformed(evt);
+            }
+        });
 
         jDateLabel.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jDateLabel.setText("Date:");
@@ -77,11 +85,11 @@ public class CreateExam extends javax.swing.JFrame {
         jLocationLabel.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jLocationLabel.setText("Location:");
 
-        jAddCourseButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jAddCourseButton.setText("Add course");
-        jAddCourseButton.addActionListener(new java.awt.event.ActionListener() {
+        jCreateExamButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
+        jCreateExamButton.setText("Create exam");
+        jCreateExamButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAddCourseButtonActionPerformed(evt);
+                jCreateExamButtonActionPerformed(evt);
             }
         });
 
@@ -165,148 +173,113 @@ public class CreateExam extends javax.swing.JFrame {
             }
         });
 
-        jExamTable.setFont(new java.awt.Font("Avenir Next", 0, 12)); // NOI18N
-        jExamTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Exam ID", "Date", "Time", "Location"
-            }
-        ));
-        jScrollPane1.setViewportView(jExamTable);
-
         jUpdateButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jUpdateButton.setText("Save update");
 
         jDeleteButton.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
         jDeleteButton.setText("Delete");
 
-        jSearchField.setFont(new java.awt.Font("Avenir Next", 0, 13)); // NOI18N
-        jSearchField.setText("Search...");
-        jSearchField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jSearchFieldMouseClicked(evt);
-            }
-        });
-        jSearchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchFieldActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSelectCourseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jSelectTimeLabel)
+                            .addComponent(jLocationLabel)
+                            .addComponent(jExamIDLabel))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextLocation)
+                            .addComponent(jTimeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCourseComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
+                                .addComponent(jDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel1)
+                                .addGap(5, 5, 5)
+                                .addComponent(jDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel2)
+                                .addGap(8, 8, 8)
+                                .addComponent(jDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jExamID, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jGenerateID))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCreateExamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(140, 140, 140)
+                                .addComponent(jResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSelectCourseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jSelectTimeLabel)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jExamIDLabel)
-                                        .addComponent(jLocationLabel)))
-                                .addGap(40, 40, 40)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jHeaderLabel)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jExamID, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jGenerateID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextLocation)
-                                    .addComponent(jTimeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCourseComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jAddCourseButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jUpdateButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(66, 66, 66))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jHeaderLabel)
-                .addGap(407, 407, 407))
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jUpdateButton)))))))
+                .addGap(39, 39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(39, 39, 39)
                 .addComponent(jHeaderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSelectCourseLabel)
-                            .addComponent(jCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDateLabel)
-                            .addComponent(jDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSelectTimeLabel)
-                            .addComponent(jTimeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLocationLabel)
-                            .addComponent(jTextLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jExamIDLabel)
-                            .addComponent(jExamID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jGenerateID))
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jAddCourseButton)
-                            .addComponent(jDeleteButton)
-                            .addComponent(jUpdateButton))
-                        .addGap(27, 27, 27)
-                        .addComponent(jResetButton)
-                        .addGap(28, 28, 28)
-                        .addComponent(jCancelButton)
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addGap(49, 49, 49))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSelectCourseLabel)
+                    .addComponent(jCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jDateLabel)
+                    .addComponent(jDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSelectTimeLabel)
+                    .addComponent(jTimeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLocationLabel)
+                    .addComponent(jTextLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jExamIDLabel)
+                    .addComponent(jExamID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jGenerateID))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCreateExamButton)
+                    .addComponent(jDeleteButton)
+                    .addComponent(jUpdateButton))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCancelButton)
+                    .addComponent(jResetButton))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,86 +291,121 @@ public class CreateExam extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jAddCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddCourseButtonActionPerformed
-
+    private void jCreateExamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateExamButtonActionPerformed
+        final int NUM_FIELDS = 7;
+        int numCorrectFields = 0;
+        boolean valid = true;
+            
+        //Get selected time from course combobox
+        String selectedTime = jTimeComboBox.getSelectedItem().toString();
+        int dd = Integer.parseInt(jDateDay.getText()); 
+        int mm = Integer.parseInt(jDateMonth.getText()); 
+        int yyyy = Integer.parseInt(jDateYear.getText()); 
+        String date = yyyy + "-" + mm + "-" + dd;
+        
         //Check if course is selected
         if (jCourseComboBox.getSelectedItem() == "Make a Selection") {
             JOptionPane.showMessageDialog(null, "Course not selected!\nPlease select a course."); 
         } else {
             course = jCourseComboBox.getSelectedItem().toString();
-        }
+            numCorrectFields++;
+         }
        
         //Check day
         if(jDateDay.getText().equalsIgnoreCase("dd") || jDateDay.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Day field is empty!\nPlease enter a day."); 
-        }
-        else {
-            try { 
-                int dd = Integer.parseInt(jDateDay.getText()); 
-                if(dd <= 0 || dd >= 31) {
-                    JOptionPane.showMessageDialog(null, "Invalid day!\nPlease enter a valid day."); 
-                }
-                else {
-                    dateDay = dd;
-                }  
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Day is not a valid number!\nPlease enter a valid day.");
-            }
-        }
-        
-        //Check month 
-        if(jDateMonth.getText().equalsIgnoreCase("mm") || jDateMonth.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Month field is empty!\nPlease enter a month."); 
-        }
-        else {
-            try { 
-                int mm = Integer.parseInt(jDateMonth.getText()); 
-                if(mm <= 0 || mm > 12) {
-                    JOptionPane.showMessageDialog(null, "Invalid month!\nPlease enter a valid month."); 
-                }
-                else {
-                    dateMonth = mm; 
-                }  
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Month is not a valid number!\nPlease enter a valid month.");
-            }
-        }
-        
-        //Check year
-        if(jDateYear.getText().equalsIgnoreCase("yyyy") || jDateYear.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Year field is empty!\nPlease enter a year."); 
-        }
-        else {
-            try { 
-                int yyyy = Integer.parseInt(jDateYear.getText()); 
-                if(yyyy < 2020 || yyyy > 2025) {
-                    JOptionPane.showMessageDialog(null, "Invalid year!\nPlease enter a valid year."); 
-                }
-                else {
-                    dateYear = yyyy; 
-                }  
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Year is not a valid number!\nPlease enter valid year.");
-            }
-        }
-        
-        //Check if time is selected 
-        if (jTimeComboBox.getSelectedItem() == "Make a Selection") {
-            JOptionPane.showMessageDialog(null, "Time not selected!\nPlease select a time."); 
         } else {
-            time = jTimeComboBox.getSelectedItem().toString();
-        }
+             try {  
+                   if(dd <= 0 || dd >= 31) {
+                       JOptionPane.showMessageDialog(null, "Invalid day!\nPlease enter a valid day."); 
+                  }
+                  else {
+                      dateDay = dd;
+                      numCorrectFields++;
+                  }  
+              } catch (NumberFormatException e) {
+                  JOptionPane.showMessageDialog(null, "Day is not a valid number!\nPlease enter a valid day.");
+              }
+         }
+         //Check month 
+         if(jDateMonth.getText().equalsIgnoreCase("mm") || jDateMonth.getText().isEmpty()) {
+             JOptionPane.showMessageDialog(null, "Month field is empty!\nPlease enter a month."); 
+          }
+          else {
+             try { 
+                  if(mm <= 0 || mm > 12) {
+                      JOptionPane.showMessageDialog(null, "Invalid month!\nPlease enter a valid month."); 
+                  }
+                  else {
+                      dateMonth = mm; 
+                      numCorrectFields++;
+                   }  
+              } catch (NumberFormatException e) {
+                 JOptionPane.showMessageDialog(null, "Month is not a valid number!\nPlease enter a valid month.");
+             }
+         }
         
-        //Check if examID has been generated 
-        if(jExamID.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Exam ID has not been generated!\nPlease generate exam ID."); 
-        }
-        else {
-            examID = jExamID.getText();
-        }
+         //Check year
+         if(jDateYear.getText().equalsIgnoreCase("yyyy") || jDateYear.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Year field is empty!\nPlease enter a year."); 
+         }
+         else {
+              try { 
+                 if(yyyy < 2021 || yyyy > 2026) {
+                     JOptionPane.showMessageDialog(null, "Exams can only be created from 2021 to 2026. Please enter a valid year."); 
+                 }
+                 else {
+                        dateYear = yyyy;
+                        numCorrectFields++;
+                 }  
+              } catch (NumberFormatException e) {
+                   JOptionPane.showMessageDialog(null, "Year is not a valid number!\nPlease enter valid year.");
+               }
+          }
         
-    }//GEN-LAST:event_jAddCourseButtonActionPerformed
-
+         //Check if time is selected 
+          if (jTimeComboBox.getSelectedItem() == "Make a Selection") {
+              JOptionPane.showMessageDialog(null, "Time not selected!\nPlease select a time."); 
+          } else {
+              time = jTimeComboBox.getSelectedItem().toString();
+              numCorrectFields++;
+          }
+        
+          //Check location 
+          if (jTextLocation.getText().equals("Room A123") || jTextLocation.getText().equals("Room A167") 
+              || jTextLocation.getText().equals("Room B198") || jTextLocation.getText().equals("Room B067")) {
+                location = jTextLocation.getText();
+                numCorrectFields++;
+          } else {
+              JOptionPane.showMessageDialog(null, "Not a valid exam location!\n"
+                      + "Please enter one of the following valid locations:\n"
+                      + "Room A123, Room A167, Room B198 or Room B067.");
+          }
+           
+          //Check examID  
+          String regex = "^[E][1-9][0-9]{4}$";
+          String input = jExamID.getText();
+          valid = input.matches(regex);
+          if(jExamID.getText().isEmpty()) {
+              JOptionPane.showMessageDialog(null, "Exam ID has not been generated!\nPlease generate exam ID."); 
+          } else if(!valid) {
+              JOptionPane.showMessageDialog(null, "Invalid exam ID.\nExam ID must follow the format 'E'+ 5 numbers.");
+          } else {
+              examID = jExamID.getText();
+              numCorrectFields++;
+          }
+          
+         //Check if all fields are correct  
+         if (numCorrectFields < NUM_FIELDS) {
+             JOptionPane.showMessageDialog(null, "Exam could not be created.\nPlease try again.");   
+         } else {
+             ViewExams.AddRowToJTable(new Object[]{
+             examID, date, selectedTime, location});
+             JOptionPane.showMessageDialog(null, "Exam successfully created!"); 
+         }
+             
+    }//GEN-LAST:event_jCreateExamButtonActionPerformed
+        
     private void jGenerateIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGenerateIDActionPerformed
        java.util.Random r = new java.util.Random();
         int start = 10000; 
@@ -446,13 +454,9 @@ public class CreateExam extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jCancelButtonActionPerformed
 
-    private void jSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchFieldActionPerformed
-
-    private void jSearchFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSearchFieldMouseClicked
-        jSearchField.setText("");
-    }//GEN-LAST:event_jSearchFieldMouseClicked
+    private void jCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCourseComboBoxActionPerformed
+        
+    }//GEN-LAST:event_jCourseComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,9 +494,9 @@ public class CreateExam extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jAddCourseButton;
     private javax.swing.JButton jCancelButton;
     private javax.swing.JComboBox<String> jCourseComboBox;
+    private javax.swing.JButton jCreateExamButton;
     private javax.swing.JTextField jDateDay;
     private javax.swing.JLabel jDateLabel;
     private javax.swing.JTextField jDateMonth;
@@ -500,7 +504,6 @@ public class CreateExam extends javax.swing.JFrame {
     private javax.swing.JButton jDeleteButton;
     private javax.swing.JTextField jExamID;
     private javax.swing.JLabel jExamIDLabel;
-    private javax.swing.JTable jExamTable;
     private javax.swing.JButton jGenerateID;
     private javax.swing.JLabel jHeaderLabel;
     private javax.swing.JLabel jLabel1;
@@ -508,8 +511,6 @@ public class CreateExam extends javax.swing.JFrame {
     private javax.swing.JLabel jLocationLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jResetButton;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jSearchField;
     private javax.swing.JLabel jSelectCourseLabel;
     private javax.swing.JLabel jSelectTimeLabel;
     private javax.swing.JTextField jTextLocation;
